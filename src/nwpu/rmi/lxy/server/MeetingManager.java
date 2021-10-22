@@ -151,6 +151,9 @@ public class MeetingManager extends UnicastRemoteObject implements MeetingInterf
         while (it.hasNext()) {
             Meeting meeting = it.next();
             if (meeting.getId().equals(uuid)) {
+                if (!meeting.getInitiator().equals(userName)){
+                    return "delete meeting FAIL: this meeting is not initated by you, you don't have permission.";
+                }
                 it.remove();
                 return "delete meeting SUCCESS.";
             }
